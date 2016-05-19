@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class two_sum{
 	public int[] twoSum(int[] nums, int target){
 		int[] res = {0, 0};

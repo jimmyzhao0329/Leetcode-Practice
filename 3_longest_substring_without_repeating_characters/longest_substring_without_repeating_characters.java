@@ -1,5 +1,6 @@
 //instead of using hash map, use index[128] will save even more time
 
+
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
         if(s.length() <= 1){
