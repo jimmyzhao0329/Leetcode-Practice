@@ -10,26 +10,39 @@
  * }
  */
 public class Solution {
+    //Non-Recursive
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<Integer>();
-        if(root == null){
-            return res;
-        }
         Stack<TreeNode> st = new Stack<TreeNode>();
         TreeNode node = root;
-        while(true){
+        while(node != null || !st.empty()){
             while(node != null){
                 st.push(node);
                 node = node.left;
             }
-            if(st.empty()){
-                break;
-            }
-            node = st.peek();
-            st.pop();
+            node = st.pop();
             res.add(node.val);
             node = node.right;
         }
         return res;
     }
+    
+    
+    //Recursive
+    /*
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        helper(root, res);
+        return res;
+    }
+    
+    public void helper(TreeNode root, List<Integer> res) {
+        if(root == null){
+            return;
+        }
+        helper(root.left, res);
+        res.add(root.val);
+        helper(root.right, res);
+    }
+    */
 }
