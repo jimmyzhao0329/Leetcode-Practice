@@ -10,9 +10,6 @@ public class Solution {
             }
             else{
                 nums[i] = nums[back--];
-                if(i != 0){
-                    i--;
-                }
             }
         }
         return i;
