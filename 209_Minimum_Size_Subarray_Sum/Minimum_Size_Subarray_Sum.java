@@ -5,23 +5,16 @@ public class Solution {
         if(nums == null || nums.length == 0){
             return 0;
         }
-        int start = 0, end = 0;
-        int sum = 0, minLen = Integer.MAX_VALUE;
-        while(end < nums.length){
-            while(end < nums.length && sum < s){
-                sum += nums[end];
-                end++;
+        int left = 0, right = 0, minLen = Integer.MAX_VALUE, sum = 0;
+        while(right < nums.length){
+            sum += nums[right];
+            
+            while(sum >= s){
+                minLen = Math.min(minLen, right - left + 1);
+                sum -= nums[left++];
             }
-            if(sum < s){
-                break;
-            }
-            while(start < nums.length && sum >= s){
-                sum -= nums[start];
-                start++;
-            }
-            if(end - start + 1 < minLen){
-                minLen = end - start + 1;
-            }
+            
+            right++;
         }
         return (minLen == Integer.MAX_VALUE) ? 0 : minLen;
     }
