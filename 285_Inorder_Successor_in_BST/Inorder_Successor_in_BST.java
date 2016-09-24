@@ -1,25 +1,30 @@
 public class Solution {
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
-    	TreeNode successor = null;
-    	while(root != null && root.val != p.val){
-    		if(root.val > p.val){
-    			successor = root;
-    			root = root.left;
-    		}
-    		else{
-    			root = root.right;
-    		}
-    	}
-    	if(root == null){
-    		return null;
-    	}
-    	if(root.right == null){
-    		return successor;
-    	}
-    	root = root.right;
-    	while(root.left != null){
-    		root = root.left;
-    	}
-    	return root;
+    	if(root == null || p == null){
+            return null;
+        }
+        TreeNode res = null
+        if(p.right != null){
+            // find its left most node 
+            res = p.right;
+            while(res.left != null){
+                res = res.left;
+            }
+            return res;
+        }
+        //if p doesn't have right subtree
+        while(root != null){
+            if(root.val > p.val){
+                res = root;
+                root = root.left;
+            }
+            else if(root.val < p.val){
+                root = root.right;
+            }
+            else {
+                break;
+            }
+        }
+        return res;
     }
 }
