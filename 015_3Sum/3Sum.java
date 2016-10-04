@@ -27,10 +27,7 @@ public class Solution {
                 }
                 int sum = nums[i] + nums[j] + nums[k];
                 if(sum == 0){
-                    List<Integer> temp = new ArrayList<Integer>();
-                    temp.add(nums[i]);
-                    temp.add(nums[j++]);
-                    temp.add(nums[k--]);
+                    List<Integer> temp = Arrays.asList(nums[i],nums[j++],nums[k--]);
                     res.add(temp);
                 }
                 else if(sum < 0){
