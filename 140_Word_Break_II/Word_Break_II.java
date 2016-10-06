@@ -1,28 +1,41 @@
 // https://leetcode.com/problems/word-break-ii/
 
 public class Solution {
-    public List<String> wordBreak(String s, Set<String> wordDict) {
-        return helper(s, wordDict, new HashMap<String, List<String>>());
+    public static List<String> wordBreak(String s, Set<String> dict) {
+        HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+        if (s == null || s.length() == 0 || dict == null) {
+            return null;
+        }
+
+        return dfs(s, dict, map);
     }
-    
-    private List<String> helper(String s, Set<String> wordDict, HashMap<String, List<String>> map){
-        if(map.containsKey(s)){
+
+    public static List<String> dfs(String s, Set<String> dict, HashMap<String, List<String>> map) {
+        if (map.containsKey(s)) {
             return map.get(s);
         }
-        List<String> res = new ArrayList<String>();
-        if(s.length() == 0){
-            res.add("");
-            return res;
-        }
-        for(String word: wordDict){
-            if(s.startsWith(word)){
-                List<String> sublist = helper(s.substring(word.length()), wordDict, map);
-                for(String sub : sublist){
-                    res.add(word + (sub.isEmpty() ? "" : " ") + sub);
-                }
+
+        List<String> list = new ArrayList<String>();
+        int len = s.length();
+
+        if (len == 0) {
+            list.add("");
+        } 
+        for (int i = 1; i <= len; i++) {
+            String sub = s.substring(0, i);
+
+            if (!dict.contains(sub)) {
+                continue;
+            }
+
+            List<String> sublist = dfs(s.substring(i), dict, map);
+
+            for (String r: sublist) {
+                list.add(sub + (r.isEmpty() ? "" : " ") + r);
             }
         }
-        map.put(s, res);
-        return res;
+
+        map.put(s, list);
+        return list;
     }
 }
