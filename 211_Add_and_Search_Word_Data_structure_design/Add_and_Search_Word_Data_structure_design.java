@@ -1,22 +1,22 @@
 // https://leetcode.com/problems/add-and-search-word-data-structure-design/
 
+// https://leetcode.com/problems/add-and-search-word-data-structure-design/
+
 public class WordDictionary {
     
     public class TrieNode {
-        public char val;
-        public boolean isWord;
-        public TrieNode[] next = new TrieNode[26];
-        public TrieNode() {}
-        public TrieNode(char c){
-            TrieNode node = new TrieNode();
-            node.val = c;
+        boolean isWord;
+        TrieNode[] next;
+        public TrieNode() {
+            this.isWord = false;
+            this.next = new TrieNode[26];
         }
     }
     
     private TrieNode root;
     
     public WordDictionary(){
-        root = new TrieNode(' ');
+        root = new TrieNode();
     }
     
     // Adds a word into the data structure.
@@ -25,7 +25,7 @@ public class WordDictionary {
         for(int i = 0; i < word.length(); i++){
             char c = word.charAt(i);
             if(node.next[c - 'a'] == null){
-                node.next[c - 'a'] = new TrieNode(c);
+                node.next[c - 'a'] = new TrieNode();
             }
             node = node.next[c - 'a'];
         }
@@ -46,9 +46,7 @@ public class WordDictionary {
                 if(node.next[c - 'a'] == null){
                     return false;
                 }
-                else{
-                    node = node.next[c - 'a'];
-                }
+                node = node.next[c - 'a'];
             }
             else{
                 for(char l = 'a'; l <= 'z'; l++){
