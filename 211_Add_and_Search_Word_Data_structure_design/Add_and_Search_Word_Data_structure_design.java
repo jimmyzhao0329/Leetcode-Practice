@@ -1,7 +1,5 @@
 // https://leetcode.com/problems/add-and-search-word-data-structure-design/
 
-// https://leetcode.com/problems/add-and-search-word-data-structure-design/
-
 public class WordDictionary {
     
     public class TrieNode {

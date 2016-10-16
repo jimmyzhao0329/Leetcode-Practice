@@ -25,4 +25,26 @@ public class Solution {
         }
         return res;
     }
+
+    public int[] maxSlidingWindow_1(int[] nums, int k) {
+        if(nums == null || nums.length == 0 || k <= 0){
+            return new int[0];
+        }
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(k, new Comparator<Integer>(){
+            @Override
+            public int compare(Integer a, Integer b){
+                return b - a;
+            }
+        });
+        int[] res = new int[nums.length - k + 1];
+        int index = 0;
+        for(int i = 0; i < nums.length; i++){
+            pq.offer(nums[i]);
+            if(pq.size() == k){
+                res[index++] = pq.peek();
+                pq.remove(nums[i - k + 1]);
+            }
+        }
+        return res;
+    }
 }

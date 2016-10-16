@@ -31,7 +31,7 @@ public class Solution {
         }
         for(int i = start; i < s.length() && i <= start + 3; i++){
             String temp = s.substring(start, i + 1);
-            if(checkIP(temp) == true){
+            if(checkIP(temp)){
                 list.add(temp);
                 helper(res, list, s, i + 1);
                 list.remove(list.size() - 1);
