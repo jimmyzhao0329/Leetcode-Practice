@@ -14,23 +14,18 @@ public class Solution {
         if(intervals.size() <= 1){
             return intervals;
         }
+        
         Collections.sort(intervals, new Comparator<Interval>(){
-            @Override
-            public int compare(Interval l1, Interval l2){
-                if(l1.start < l2.start){
-                    return -1;
-                }
-                else if(l1.start == l2.start){
-                    return 0;
-                }
-                else{
-                    return 1;
-                }
+            @Override 
+            public int compare(Interval I1, Interval I2){
+                return I1.start - I2.start;
             }
-        });
+        } );
+        
         List<Interval> res = new ArrayList<Interval>();
         int start = intervals.get(0).start;
         int end = intervals.get(0).end;
+        
         for(Interval i : intervals){
             if(i.start <= end){
                 end = Math.max(end, i.end);
