@@ -11,7 +11,9 @@
  */
 public class Solution {
     public void flatten(TreeNode root) {
+        
         while(root != null){
+            
             if(root.left != null && root.right != null){
                 TreeNode node = root.left;
                 while(node.right != null){
@@ -22,8 +24,9 @@ public class Solution {
             
             if(root.left != null){
                 root.right = root.left;
+                root.left = null;
             }
-            root.left = null;
+            
             root = root.right;
         }
     }
