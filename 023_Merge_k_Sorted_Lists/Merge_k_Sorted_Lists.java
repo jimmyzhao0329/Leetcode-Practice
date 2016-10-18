@@ -14,33 +14,27 @@ public class Solution {
             return null;
         }
         
-        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length, new Comparator<ListNode>(){
-            @Override
-            public int compare(ListNode l1, ListNode l2){
-                if(l1.val < l2.val){
-                    return -1;
-                }
-                else if(l1.val == l2.val){
-                    return 0;
-                }
-                else{
-                    return 1;
-                }
-            }
-        });
-        
+        PriorityQueue<ListNode> pq = 
+            new PriorityQueue<ListNode>(lists.length, 
+                new Comparator<ListNode>() {
+                    @Override
+                    public int compare(ListNode l1, ListNode l2){
+                        return l1.val - l2.val;
+                    }
+            });
         ListNode dummy = new ListNode(-1);
         ListNode p = dummy;
-        for(ListNode ln : lists){
-            if(ln != null){
-                queue.offer(ln);
+        
+        for(ListNode l : lists){
+            if(l != null){
+                pq.offer(l);
             }
         }
-        while(!queue.isEmpty()){
-            p.next = queue.poll();
+        while(!pq.isEmpty()){
+            p.next = pq.poll();
             p = p.next;
             if(p.next != null){
-                queue.offer(p.next);
+                pq.offer(p.next);
             }
         }
         return dummy.next;
